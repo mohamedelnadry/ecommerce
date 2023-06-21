@@ -7,6 +7,7 @@ from .views import (
     CartView,
     OrderView,
 )
+
 urlpatterns = [
     # User registration endpoint
     path("v1/register", RegisterView.as_view(), name="register"),
