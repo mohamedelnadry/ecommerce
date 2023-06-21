@@ -1,25 +1,9 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import UserProfile, Product, Cart
+from .models import Profile, Product, Cart, Order
 from django.contrib.auth.models import User
 import re
 
-
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-
-        # Add custom claims
-        token["username"] = user.username
-        token["email"] = user.email
-        return token
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ["username", "email"]
 
 
 class ResgisterSerializer(serializers.ModelSerializer):
@@ -44,17 +28,12 @@ class ResgisterSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        password = validated_data.pop("password", None)
         address = validated_data.pop("address")
         phone_number = validated_data.pop("phone_number")
         user = User.objects.create_user(**validated_data)
-        if password is not None:
-            user.set_password(password)
-        user.save()
-        UserProfile.objects.create(
+        Profile.objects.create(
             user=user, address=address, phone_number=phone_number
         )
-
         return user
 
 
@@ -67,8 +46,10 @@ class ProductSerializer(serializers.ModelSerializer):
 class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
-        fields = ["products"]
+        fields = ['id',"products"]
         depth = 1
+
+
 
 
 class CreateCartSerializer(serializers.Serializer):
@@ -76,7 +57,6 @@ class CreateCartSerializer(serializers.Serializer):
 
     def validate_product(self, value):
         product = Product.objects.filter(pk=value)
-        print(product)
         if product.exists():
             return product.first()
         raise serializers.ValidationError("Proudcut Not Found")
@@ -84,7 +64,30 @@ class CreateCartSerializer(serializers.Serializer):
     def create(self, validated_data):
         user = self.context["user"]
         product = validated_data.pop("product")
-        print(product)
         cart, created = Cart.objects.get_or_create(user_id=user)
         cart.products.add(product)
         return cart
+
+class OrderListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ['id',"products"]
+        depth = 1
+
+
+
+class OrderSerializer(serializers.Serializer):
+
+    def create(self, validated_data):
+        user = self.context["user"]
+        cart = Cart.objects.get(user_id=user)
+        order = Order.objects.create(user=user)
+        products = cart.products.all()
+        if not products:
+            raise serializers.ValidationError("No Products in Card")
+        order.products.add(*products)
+        cart.products.clear()
+        return order
+
+
+
