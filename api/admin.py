@@ -1,4 +1,4 @@
-""" API:admin file """
+""" API:admin file. """
 from django.contrib import admin
 
 from .models import Product, Cart, Order

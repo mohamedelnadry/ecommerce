@@ -1,3 +1,4 @@
+""" API:serializer file. """
 import re
 from django.contrib.auth.models import User
 from rest_framework import serializers

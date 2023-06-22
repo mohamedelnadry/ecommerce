@@ -1,3 +1,4 @@
+"""API App Views."""
 from rest_framework import generics, status, views
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
