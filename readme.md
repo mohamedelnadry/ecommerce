@@ -9,9 +9,9 @@ Before you begin, ensure you have met the following requirements:
 * You have installed the latest version of Python, Django, and PostgreSQL.
 * You are familiar with Python, Django, PostgreSQL, and the Django REST Framework.
 
-## Installing YourProject
+## Installing Project
 
-To install YourProject, follow these steps:
+To install Project, follow these steps:
 
 1. Clone the repository:
 
@@ -97,6 +97,9 @@ Your application will be accessible at http://127.0.0.1:8000.
 **Parameters**:
 
 - `product`: (required) Specify the ID of the product you wish to add to or remove from your cart.
+
+**Headers**:
+
 - `token`: (required) Please provide your authentication token to access and modify your data.
 
 ### Order Endpoint
@@ -107,7 +110,7 @@ Your application will be accessible at http://127.0.0.1:8000.
 
 **Description**: This endpoint allows you to place orders for the products in your cart and view a list of your previous orders.
 
-**Parameters**:
+**Headers**:
 
 - `token`: (required) Please provide your authentication token to access and modify your data.
 
@@ -116,4 +119,8 @@ Your application will be accessible at http://127.0.0.1:8000.
 **Method**: `GET`
 
 **Description**: This endpoint allows you to view the details of a specific order using its unique ID.
+
+**Headers**:
+
+- `token`: (required) Please provide your authentication token to access and modify your data.
 
