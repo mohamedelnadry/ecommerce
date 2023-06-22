@@ -46,3 +46,24 @@ To run the server, execute:
     python manage.py runserver
 ```
 Your application will be accessible at http://127.0.0.1:8000.
+
+## API Endpoints
+
+### User Endpoint
+
+**Endpoint**: `http://127.0.0.1:8000/api/v1/register`
+
+**Method**: `POST`
+
+**Description**: Creates a new user upon receiving a valid POST request.
+
+
+**Parameters**:
+
+- `username`: (required) The username should be unique. Make sure to choose a username that hasn't been taken.
+- `email`: (required) Please provide a valid email address.
+- `password`: (required) Your password should be a minimum of 8 characters long and must include letters, numbers, and special characters for security.
+- `address`: (required) Please enter your full address.
+- `phone_number`: (required) Please provide your valid phone number.
+
+
