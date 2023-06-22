@@ -43,7 +43,6 @@ python manage.py migrate
 To run the server, execute:
 
 ```bash
-    Copy code
     python manage.py runserver
-    Your application will be accessible at http://127.0.0.1:8000.
 ```
+Your application will be accessible at http://127.0.0.1:8000.
