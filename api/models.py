@@ -70,9 +70,7 @@ class Order(models.Model):
     user = models.ForeignKey(
         Profile, related_name="user_order", on_delete=models.PROTECT
     )
-    products = models.ManyToManyField(
-        Product, related_name="product_order", null=True, blank=True
-    )
+    products = models.ManyToManyField(Product, related_name="product_order", blank=True)
 
     def __str__(self):
         """Returns the username of the user who placed the order."""

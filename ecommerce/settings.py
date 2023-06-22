@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+from decouple import Config
+
+config = Config()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,12 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-s)f)48gj=yf3(jl$d%d4_ljqlqw)6p)q^8m^$f9=cdm990aw7$"
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config("ALLOWED_HOSTS")
 
 
 # Application definition
@@ -42,7 +45,7 @@ INSTALLED_APPS = [
     # 3rd party
     "rest_framework",
     "rest_framework_simplejwt",
-    "django_filters",
+    "drf_yasg",
     # Local
     "api",
 ]
@@ -92,14 +95,24 @@ WSGI_APPLICATION = "ecommerce.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "ecommerce",
+#         "USER": "postgres",
+#         "PASSWORD": "1",
+#         "HOST": "localhost",
+#         "PORT": 5432,
+#     }
+# }
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "ecommerce",
-        "USER": "postgres",
-        "PASSWORD": "1",
-        "HOST": "localhost",
-        "PORT": 5432,
+        "NAME": config("DB_NAME"),
+        "USER": config("DB_USER"),
+        "PASSWORD": config("DB_PASSWORD"),
+        "HOST": config("DB_HOST"),
+        "PORT": config("DB_PORT"),
     }
 }
 
