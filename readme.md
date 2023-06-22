@@ -1,4 +1,4 @@
-# YourProject
+# Ecommerce
 
 This is a simple e-commerce project that facilitates the creation of shopping carts. Users can add products to their carts and place orders seamlessly.
 
