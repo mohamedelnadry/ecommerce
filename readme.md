@@ -66,4 +66,54 @@ Your application will be accessible at http://127.0.0.1:8000.
 - `address`: (required) Please enter your full address.
 - `phone_number`: (required) Please provide your valid phone number.
 
+**Endpoint**: `http://127.0.0.1:8000/api/v1/login`
+
+**Method**: `POST`
+
+**Description**: This is the login page where users can securely access their personal data.
+
+**Parameters**:
+
+- `username`: (required) The username should be unique. Make sure to choose a username that hasn't been taken.
+- `password`: (required) Your password should be a minimum of 8 characters long and must include letters, numbers, and special characters for security.
+
+### Products Endpoint
+
+**Endpoint**: `http://127.0.0.1:8000/api/v1/products`
+
+**Method**: `GET`
+
+**Description**: This is the section where users can browse through and view details of various products.
+
+### Cart Endpoint
+
+**Endpoint**: `http://127.0.0.1:8000/api/v1/cart`
+
+**Method**: `POST` | `GET` | `DELETE`
+
+**Description**: This is the interface where you can manage your shopping cart - you can view the items in your cart, add new items, or delete existing items.
+
+
+**Parameters**:
+
+- `product`: (required) Specify the ID of the product you wish to add to or remove from your cart.
+- `token`: (required) Please provide your authentication token to access and modify your data.
+
+### Order Endpoint
+
+**Endpoint**: `http://127.0.0.1:8000/api/v1/order`
+
+**Method**: `POST` | `GET`
+
+**Description**: This endpoint allows you to place orders for the products in your cart and view a list of your previous orders.
+
+**Parameters**:
+
+- `token`: (required) Please provide your authentication token to access and modify your data.
+
+**Endpoint**: `http://127.0.0.1:8000/api/v1/order/{id}`
+
+**Method**: `GET`
+
+**Description**: This endpoint allows you to view the details of a specific order using its unique ID.
 
